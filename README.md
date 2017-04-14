@@ -2,8 +2,11 @@
 IG Clone
 
 ## Contributors
-Jamie [@jbnelson0] - DB
+Jamie @jbnelson0 - DB
 
-Brian [@bigbliseo] - FE
+Brian @bigbliseo - FE
 
-Chester [@cjpennock] - API
+Chester @cjpennock - API
+
+## Overview
+Instagram clone developed using HTML/CSS, Express, SQL
