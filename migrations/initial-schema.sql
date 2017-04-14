@@ -1,0 +1,9 @@
+-- UP
+CREATE TABLE employee(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+);
+
+-- DOWN
+
+DROP TABLE employee;
