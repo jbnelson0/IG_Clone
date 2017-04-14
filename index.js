@@ -13,7 +13,7 @@ app.use('/', express.static('./public/', {
 
 Promise.resolve()
     .then(() => db.open('./database.sqlite', { Promise }))
-    // .then(() => db.migrate({ force: 'last' }))
+    .then(() => db.migrate({ force: 'last' }))
     .then(() => app.listen(port))
     .then(() => {
         console.log(`Server started on port ${port}`)
