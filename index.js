@@ -11,6 +11,30 @@ app.use('/', express.static('./public/', {
     'index': ['index.html']
 }));
 
+app.get('/get', (req, res, next) => {
+    res.header('Content-Type', 'application/json');
+	res.send({
+        "message": "GET request to the homepage",
+        "success": true
+    })
+})
+
+app.post('/post', (req, res, next) => {
+    res.header('Content-Type', 'application/json');
+    res.send({
+        "message": "POST request to the homepage",
+        "success": true
+    })
+})
+
+app.delete('/delete', (req, res, next) => {
+    res.header('Content-Type', 'application/json');
+    res.send({
+        "message": "DELETE request to the homepage",
+        "success": true
+    });
+});
+
 Promise.resolve()
     .then(() => db.open('./database.sqlite', { Promise }))
     .then(() => db.migrate({ force: 'last' }))
