@@ -19,7 +19,7 @@ app.get('/get', (req, res, next) => {
     })
 })
 
-app.post('/', (req, res, next) => {
+app.post('/post', (req, res, next) => {
     res.header('Content-Type', 'application/json');
     res.send({
         "message": "POST request to the homepage",
@@ -27,7 +27,7 @@ app.post('/', (req, res, next) => {
     })
 })
 
-app.delete('/', (req, res, next) => {
+app.delete('/delete', (req, res, next) => {
     res.header('Content-Type', 'application/json');
     res.send({
         "message": "DELETE request to the homepage",
