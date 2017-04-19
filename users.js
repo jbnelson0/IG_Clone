@@ -11,3 +11,4 @@ DB.findUserByUserID = (user_id) =>{
 	return db.run("SELECT * FROM users WHERE id = ? ", [user_id])
 }
 
+module.exports = DB
