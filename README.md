@@ -4,7 +4,7 @@ IG Clone
 ## Contributors
 Jamie @jbnelson0 - DB
 
-Brian @bigbliseo - FE
+Brian @bigeliseo - FE
 
 Chester @cjpennock - API
 
