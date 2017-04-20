@@ -1,5 +1,5 @@
 
-const SQL = require('sqlite');
+const db = require('sqlite');
 
 const DB = {}
 
