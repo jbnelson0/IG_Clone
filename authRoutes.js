@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
-const Users = require('./users');
+const users = require('./users');
+
 
 const parser = require('body-parser');
 router.use(parser.json());

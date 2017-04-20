@@ -1,5 +1,6 @@
 -- UP
 
+
 CREATE TABLE users(
 	user_id	INTEGER	PRIMARY KEY,
 	username	TEXT	NOT NULL,
@@ -8,4 +9,6 @@ CREATE TABLE users(
 
 -- DOWN
 
+
 DROP TABLE users;
+

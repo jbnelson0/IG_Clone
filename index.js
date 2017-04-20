@@ -9,7 +9,7 @@ const port = 8008;
 const parser = require('body-parser');
 app.use(parser.json())
 
-app.use('/', express.static('./public/', {
+app.use('/', express.static('./IGclone/', {
     'index': ['index.html']
 }));
 
