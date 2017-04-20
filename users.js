@@ -1,19 +1,21 @@
-
-const SQL = require('sqlite');
-
+const db = require('sqlite');
+const DB_NAME = './database.sqlite';
 const DB = {}
 
-DB.createNewUser = (first_name, last_name, username, password) => {
-	return db.run("INSERT INTO users (first_name, last_name, username, password) values (?, ?, ?, ?)", [first_name, last_name, username, password])
-}
+DB.createNewUser = (username, password) => {
+	return db.run("INSERT INTO users (username, password) values (?, ?)", [username, password])
+};
 
 DB.findUserByUserID = (user_id) =>{
 	return db.all("SELECT * FROM users WHERE id = ? ", [user_id])
-}
+};
 
-DB.selectAllUsers = (table_name) => {
-	return db.all("SELECT * FROM" + table_name)
-}
+DB.selectAllUsers = () => {
+	return db.all("SELECT * FROM users")
+};
+
+Promise.resolve()
+    .then(() => db.open(DB_NAME, { Promise }))
+    .catch(err => console.error(err.stack))
 
 module.exports = DB
-
