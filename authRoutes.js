@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const users = require('./users');
+const Users = require('./users');
 
 
 const parser = require('body-parser');
