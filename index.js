@@ -1,5 +1,7 @@
 const express = require('express');
-const db = require('sqlite');
+const db = require('sqlite')
+
+const authRoutes = require('./authRoutes.js');
 
 let app = express();
 const port = 8008;
@@ -7,33 +9,11 @@ const port = 8008;
 const parser = require('body-parser');
 app.use(parser.json())
 
-app.use('/', express.static('./public/', {
+app.use('/', express.static('./IGclone/', {
     'index': ['index.html']
 }));
 
-app.get('/get', (req, res, next) => {
-    res.header('Content-Type', 'application/json');
-	res.send({
-        "message": "GET request to the homepage",
-        "success": true
-    })
-})
-
-app.post('/post', (req, res, next) => {
-    res.header('Content-Type', 'application/json');
-    res.send({
-        "message": "POST request to the homepage",
-        "success": true
-    })
-})
-
-app.delete('/delete', (req, res, next) => {
-    res.header('Content-Type', 'application/json');
-    res.send({
-        "message": "DELETE request to the homepage",
-        "success": true
-    });
-});
+app.use('/auth', authRoutes);
 
 Promise.resolve()
     .then(() => db.open('./database.sqlite', { Promise }))
