@@ -45,15 +45,15 @@ img.avatar {
     padding: 16px;
 }
 
-/* The "Forgot password" text */
-span.psw {
+/* The "Forgot password" text 
+    span.password {
     float: right;
-    padding-top: 16px;
+    padding-top: 16px;*/
 }
 
 
 @media screen and (max-width: 300px) {
-    span.psw {
+    span.password {
         display: block;
         float: none;
     }
