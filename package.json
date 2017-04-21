@@ -1,22 +1,14 @@
 {
-  "name": "ig_clone",
+  "name": "myplaces",
   "version": "1.0.0",
-  "description": "clone of instagram",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "supervisor index.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jbnelson0/NYCDA_Instagram_Clone.git"
+    "start": "./node_modules/.bin/supervisor index.js"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jbnelson0/NYCDA_Instagram_Clone/issues"
-  },
-  "homepage": "https://github.com/jbnelson0/NYCDA_Instagram_Clone#readme",
   "dependencies": {
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
