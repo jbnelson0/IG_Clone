@@ -1,21 +1,10 @@
 const express = require('express');
-const router = express.Router();
 
-const Users = require('./users');
+const authApp = express();
 
-
-const parser = require('body-parser');
-router.use(parser.json());
-
-router.post('/createNewUser', (req, res, next) => {
-	Users.createNewUser(req.body.username, req.body.password)
-	    .then((data) => {
-	    	res.header('Content-Type', 'application/json');
-	        res.send({ data });
-	    })
-	    .catch((e) => {
-	        res.status(401);
-	    });
+// login route
+authApp.post('/login', (request, response) => {
+	response.send('IN LOGIN ROUTE')
 });
 
-module.exports = router;
+module.exports = authApp;
