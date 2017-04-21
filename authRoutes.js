@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< HEAD
 const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
@@ -54,3 +55,14 @@ router.post('/createNewUser', (req, res, next) => {
         });
 });
 module.exports = router;
+=======
+
+const authApp = express();
+
+// login route
+authApp.post('/login', (request, response) => {
+	response.send('IN LOGIN ROUTE')
+});
+
+module.exports = authApp;
+>>>>>>> ca6e48c3aa46bc1631b46f30070e692a4716778b
