@@ -13,16 +13,12 @@
     "body-parser": "^1.17.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.2",
-<<<<<<< HEAD
     "express-session": "^1.15.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "router-express": "^1.5.2",
     "serve-static": "^1.12.1",
     "sqlite": "^2.5.0"
-=======
-    "lowdb": "^0.16.0"
->>>>>>> ca6e48c3aa46bc1631b46f30070e692a4716778b
   },
   "devDependencies": {
     "supervisor": "^0.12.0"

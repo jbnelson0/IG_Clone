@@ -9,11 +9,26 @@ const port = 8008;
 const parser = require('body-parser');
 app.use(parser.json())
 
-app.use('/', express.static('./IGclone/', {
+app.use('/', express.static('./public/', {
     'index': ['index.html']
 }));
 
-app.use('/auth', authRoutes);
+app.use(authRoutes(db));
+
+
+app.get('/api/users', (request, response) => {
+	console.log('here now -----')
+	return db.all(`SELECT * FROM users`)
+		.then((data) => {
+			console.log(data)
+			response.send(data);
+		})
+		.catch((e) => {
+			console.log(e);
+			response.status(403);
+			response.send({error: e})
+		})
+})
 
 Promise.resolve()
     .then(() => db.open('./database.sqlite', { Promise }))

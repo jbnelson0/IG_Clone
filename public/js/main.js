@@ -33,19 +33,27 @@
     };
     
     		const submitBtn = document.querySelector('#submit');
+            console.log(submitBtn);
             const loginUsername = document.querySelector('#username');
             const loginPassword = document.querySelector('#password');
 
-            submitBtn.addEventListener('click', ()=>{
-              const username = loginUsername.value;
-              const password = loginPassword.value;
+    submitBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
 
-              console.log(username)
-              console.log(password)
+      const username = loginUsername.value;
+      const password = loginPassword.value;
 
-              POST('./post',{username, password})
+      console.log(username)
+      console.log(password)
 
-            })
+      POST('/auth/login', {
+        email: username,
+        password: password
+      })
+
+      // GET('/auth/login',{username, password})
+
+    })
 
 
 
