@@ -36,16 +36,16 @@
             const loginUsername = document.querySelector('#username');
             const loginPassword = document.querySelector('#password');
 
-            submitBtn.addEventListener('click', ()=>{
-              const username = loginUsername.value;
-              const password = loginPassword.value;
+    submitBtn.addEventListener('click', ()=>{
+      const username = loginUsername.value;
+      const password = loginPassword.value;
 
-              console.log(username)
-              console.log(password)
+      console.log(username)
+      console.log(password)
 
-              POST('./post',{username, password})
+      POST('/auth/createNewUser',{username, password})
 
-            })
+    })
 
 
 

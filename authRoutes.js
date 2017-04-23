@@ -44,8 +44,10 @@ passport.use(new LocalStrategy(
 // router.POST('/login', (req, res, next) => {
 // });
 router.post('/createNewUser', (req, res, next) => {
+	console.log(req.body)
     Users.createNewUser(req.body.username, req.body.password)
         .then((data) => {
+        	console.log(data)
             res.header('Content-Type', 'application/json');
             res.send({ data });
         })
