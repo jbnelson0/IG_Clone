@@ -45,7 +45,7 @@ passport.use(new LocalStrategy(
 // });
 router.post('/createNewUser', (req, res, next) => {
 	console.log(req.body)
-    Users.createNewUser(req.body.username, req.body.password)
+    Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
         .then((data) => {
         	console.log(data)
             res.header('Content-Type', 'application/json');
