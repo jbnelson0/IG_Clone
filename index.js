@@ -1,7 +1,11 @@
 const express = require('express');
 const db = require('sqlite')
 
+const users = require('./users.js')
+const posts = require('./posts.js')
+
 const authRoutes = require('./authRoutes.js');
+const apiRoutes = require('./apiRoutes.js');
 
 let app = express();
 const port = 8008;
@@ -13,22 +17,10 @@ app.use('/', express.static('./public/', {
     'index': ['index.html']
 }));
 
-app.use(authRoutes(db));
+app.use('/auth', authRoutes(db));
 
+app.use('/api', apiRoutes);
 
-app.get('/api/users', (request, response) => {
-	console.log('here now -----')
-	return db.all(`SELECT * FROM users`)
-		.then((data) => {
-			console.log(data)
-			response.send(data);
-		})
-		.catch((e) => {
-			console.log(e);
-			response.status(403);
-			response.send({error: e})
-		})
-})
 
 Promise.resolve()
     .then(() => db.open('./database.sqlite', { Promise }))
