@@ -46,6 +46,29 @@
     //   // GET('/auth/login',{username, password})
     // })
     
+
+    		const submitBtn = document.querySelector('#submit');
+            console.log(submitBtn);
+            const loginUsername = document.querySelector('#username');
+            const loginPassword = document.querySelector('#password');
+
+    submitBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+
+      const username = loginUsername.value;
+      const password = loginPassword.value;
+
+      console.log(username)
+      console.log(password)
+
+      POST('/auth/login', {
+        email: username,
+        password: password
+      })
+
+      // GET('/auth/login',{username, password})
+
+
     		const signupSubmitBtn = document.querySelector('.js-signup-BTN');
             const signupUsername = document.querySelector('.js-signup-un');
             const signupPassword = document.querySelector('.js-signup-pw');
@@ -66,6 +89,7 @@
       console.log(lastName)
 
       POST('/auth/createNewUser',{username, password, firstName, lastName})
+
 
     })
 

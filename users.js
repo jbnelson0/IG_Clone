@@ -9,7 +9,7 @@ DB.createNewUser = (username, password, firstName, lastName) => {
 };
 
 DB.findUserByUserID = (user_id) =>{
-	return db.all("SELECT * FROM users WHERE id = ? ", [user_id])
+	return db.all("SELECT * FROM users WHERE user_id = ? ", [user_id])
 };
 
 module.exports = DB
