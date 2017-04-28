@@ -12,3 +12,8 @@ posts.findPostsByID = (user_id) =>{
 	return db.all("SELECT * FROM posts WHERE id = ? ", [user_id])
 };
 
+posts.returnAllPosts = () => {
+	return db.all("select * FROM posts")
+}
+
+module.exports = posts

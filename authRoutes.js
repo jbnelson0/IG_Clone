@@ -44,7 +44,7 @@ router.use(passport.initialize());
 router.use(passport.session())
 // Passport routes
 // Login
-router.post('/login', passport.authenticate('local'), (request, response, next) => {
+router.post('/auth/login', passport.authenticate('local'), (request, response, next) => {
     console.log('In login.')
     passport.authenticate('local', (err, user, info) => {
         console.log('IN passport.authenticate')
@@ -65,32 +65,24 @@ router.post('/login', passport.authenticate('local'), (request, response, next) 
         });
     })(request, response, next);
 });
-// router.POST('/login', (req, res, next) => {
-// });
 
-// router.post('/login', passport.authenticate('local'), (req, res, next) => {
-//     console.log('In login.')
-//     if (!false) res.redirect('/upload.html');
-//     console.log('redirecting')
+// router.post('/createNewUser', (req, res, next) => {
+// 	console.log(req.body)
+//     Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
+//         .then((data) => {
+//         	console.log(data)
+//             res.header('Content-Type', 'application/json');
+//             res.send({ data });
+//         })
+//         .catch((e) => {
+//             res.status(401);
+//         });
 // });
-
-router.post('/createNewUser', (req, res, next) => {
-	console.log(req.body)
-    Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
-        .then((data) => {
-        	console.log(data)
-            res.header('Content-Type', 'application/json');
-            res.send({ data });
-        })
-        .catch((e) => {
-            res.status(401);
-        });
-});
 
 
 router.use((request, response, next) => {
     console.log('!!!here', request.isAuthenticated())
-    if (request.isAuthenticated()) {
+    if (request.isAuthenticated() === true) {
         next();
         
     }
