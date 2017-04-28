@@ -8,6 +8,8 @@ CREATE TABLE users(
 );
 
 INSERT INTO users (username, password, first_name, last_name) values ('jsmith1', 'abc123', 'John', 'Smith')
+INSERT INTO users (username, password, first_name, last_name) values ('aadams1', 'ghi789', 'Amy', 'Adams')
+INSERT INTO users (username, password, first_name, last_name) values ('jsnow1', 'def456', 'John', 'Snow')
 
 -- DOWN
 

@@ -43,11 +43,17 @@ passport.use(new LocalStrategy(
 // Login
 // router.POST('/login', (req, res, next) => {
 // });
+
+// router.post('/login', passport.authenticate('local'), (req, res, next) => {
+//     console.log('In login.')
+//     if (!false) res.redirect('/upload.html');
+//     console.log('redirecting')
+// });
+
 router.post('/createNewUser', (req, res, next) => {
 	console.log(req.body)
     Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
         .then((data) => {
-        	console.log(data)
             res.header('Content-Type', 'application/json');
             res.send({ data });
         })
