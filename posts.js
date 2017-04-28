@@ -1,7 +1,7 @@
 const db = require('sqlite');
 const posts = {}
 
-posts.createNewPost = (id, pic) => {
+posts.createNewPost = (id, post) => {
 	return db.run("INSERT INTO posts (id, post) values (?, ?)", [id, post])
 		.then(() => {
 			return db.all("SELECT * FROM users")
