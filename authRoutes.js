@@ -67,6 +67,13 @@ router.post('/login', passport.authenticate('local'), (request, response, next) 
 });
 // router.POST('/login', (req, res, next) => {
 // });
+
+// router.post('/login', passport.authenticate('local'), (req, res, next) => {
+//     console.log('In login.')
+//     if (!false) res.redirect('/upload.html');
+//     console.log('redirecting')
+// });
+
 router.post('/createNewUser', (req, res, next) => {
 	console.log(req.body)
     Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
