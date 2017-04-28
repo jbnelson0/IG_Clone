@@ -6,7 +6,7 @@ const users = require('./users.js')
 const posts = require('./posts.js')
 
 App.get('/users', (request, response) => {
-	console.log('here now -----')
+	console.log('in api/users')
 	return users.returnAllUsers()
 		.then((data) => {
 			console.log(data)
@@ -20,7 +20,7 @@ App.get('/users', (request, response) => {
 });
 
 App.get('/:id/users', (request, response) => {
-	console.log('here now -----')
+	console.log('in api/:id/users')
 	return users.findUserByUserID(request.params.id)
 		.then((data) => {
 			console.log(data)
