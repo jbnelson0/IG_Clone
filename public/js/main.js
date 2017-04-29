@@ -31,11 +31,6 @@
             request.send(JSON.stringify(data));
         });
     };
-    
-    		const submitBtn = document.querySelector('#submit');
-            console.log(submitBtn);
-            const loginUsername = document.querySelector('#username');
-            const loginPassword = document.querySelector('#password');
  // POST
 
 
