@@ -85,10 +85,10 @@ router.post('/createNewUser', (req, res, next) => {
 
 // ------Added here----------
 // Load homepage by user_id
-router.post('/users/:id', (request, response, next) => {
-    console.log('User home page');
-    const id = parseInt(request.params.id, 10);
-})
+// router.post('/users/:id', (request, response, next) => {
+//     console.log('User home page');
+//     const id = parseInt(request.params.id, 10);
+// })
 // --------------------------
 // router.post('/createNewUser', (req, res, next) => {
 // 	console.log(req.body)
