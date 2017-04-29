@@ -12,4 +12,8 @@ DB.findUserByUserID = (user_id) =>{
 	return db.all("SELECT * FROM users WHERE user_id = ? ", [user_id])
 };
 
+DB.returnAllUsers = () =>{
+	return db.all("SELECT * FROM users")
+}
+
 module.exports = DB
