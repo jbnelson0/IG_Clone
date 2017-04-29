@@ -60,3 +60,26 @@ span.password {
 
 }
 
+.ui.container.half {
+    width: 50%;
+    margin: auto;
+}
+
+.ui.container.eighty {
+    width: 80%;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

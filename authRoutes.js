@@ -42,6 +42,8 @@ passport.use(new LocalStrategy({
 }));
 router.use(passport.initialize());
 router.use(passport.session())
+
+
 // Passport routes
 // Login
 router.post('/auth/login', passport.authenticate('local'), (request, response, next) => {
@@ -66,6 +68,28 @@ router.post('/auth/login', passport.authenticate('local'), (request, response, n
     })(request, response, next);
 });
 
+// router.POST('/login', (req, res, next) => {
+// });
+router.post('/createNewUser', (req, res, next) => {
+	console.log(req.body)
+    Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
+        .then((data) => {
+        	console.log(data)
+            res.header('Content-Type', 'application/json');
+            res.send({ data });
+        })
+        .catch((e) => {
+            res.status(401);
+        });
+});
+
+// ------Added here----------
+// Load homepage by user_id
+router.post('/users/:id', (request, response, next) => {
+    console.log('User home page');
+    const id = parseInt(request.params.id, 10);
+})
+// --------------------------
 // router.post('/createNewUser', (req, res, next) => {
 // 	console.log(req.body)
 //     Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)

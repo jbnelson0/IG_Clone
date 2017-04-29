@@ -30,7 +30,13 @@
 
             request.send(JSON.stringify(data));
         });
-    }; // POST
+    };
+    
+    		const submitBtn = document.querySelector('#submit');
+            console.log(submitBtn);
+            const loginUsername = document.querySelector('#username');
+            const loginPassword = document.querySelector('#password');
+ // POST
 
 
     //         const submitBtn = document.querySelector('#submit');
@@ -66,7 +72,6 @@
       })
 
     });  // GET('/auth/login',{username, password})
-
 
     // 		const signupSubmitBtn = document.querySelector('.js-signup-BTN');
     //         const signupUsername = document.querySelector('.js-signup-un');
