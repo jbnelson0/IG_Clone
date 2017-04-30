@@ -3,9 +3,8 @@
 <head>
 <link rel="stylesheet" href="./styles/main.css">
 <h2>Create New Account</h2>
-<form >
-  <div class="imgcontainer">
-<div class="container">
+<form>
+ <div class="container">
 
 	 <label><b>First Name</b></label>
     <input type="text" placeholder="Enter First name" name="First name" required>
@@ -22,7 +21,7 @@
     <input type="password" placeholder="Enter Password" name="password" required>
 	<title></title>
 
-	  <button type="submit">Submit</button><a href="index.html"></a>
+	  <button type id="submit">Submit</button><a href="index.html"></a>
 	  <span class="Return"> <a href="index.html">Go back</a></span>
 	</form>
 
@@ -30,5 +29,18 @@
 <body>
 
 </body>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDqN1few0Y8Ef8UPxjewsp2EQFPEbrmPVQ",
+    authDomain: "ig-clone.firebaseapp.com",
+    databaseURL: "https://ig-clone.firebaseio.com",
+    projectId: "ig-clone",
+    storageBucket: "ig-clone.appspot.com",
+    messagingSenderId: "691342051966"
+  };
+  firebase.initializeApp(config);</script>
+<script src="js/main.js"></script>
 <script src="./js/main.js"></script>
 </html>
