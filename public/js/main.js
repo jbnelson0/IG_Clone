@@ -30,8 +30,7 @@
 
             request.send(JSON.stringify(data));
         });
-    };
- // POST
+    }; // POST
 
 
     //         const submitBtn = document.querySelector('#submit');
@@ -46,11 +45,32 @@
     //   console.log(password)
     //   // GET('/auth/login',{username, password})
     // })
+
+    // render more stuff
+    function renderFeed(posts) {
+        const feed = document.querySelector('.js-feed-feed');
+        feed.innerHTML = '';
+        for (const postItem of posts) {
+        
+        const h4 = document.createElement('h4');
+        h4.innerHTML = `
+                    <span class='js-feed-username'>${postItem.data.username}</span>
+                    `;
+        }
+
+        if (posts.length === 0) {
+            container.innerHTML = `
+                <li class="list-group-item">
+                No Posts!
+                </li>
+            `;
+        }
+    };
     
 
-    	const submitBtn = document.querySelector('#submit');
-        const loginUsername = document.querySelector('#username');
-        const loginPassword = document.querySelector('#password');
+    const submitBtn = document.querySelector('#submit');
+    const loginUsername = document.querySelector('#username');
+    const loginPassword = document.querySelector('#password');
 
     submitBtn.addEventListener('click', (e)=>{
         e.preventDefault();

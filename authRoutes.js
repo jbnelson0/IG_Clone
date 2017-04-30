@@ -19,10 +19,11 @@ router.use(session({
 }));
 // ---------
 passport.serializeUser((user, done) => {
+    console.log('serializeUser')
     done(null, user)
 });
 passport.deserializeUser((user, done) => {
-    console.log(user, '------------')
+    console.log('deserializeUser')
     done(null, user);
 });
 // Local strategy
@@ -40,13 +41,14 @@ passport.use(new LocalStrategy({
             })
             .catch(err => console.log(err.stack))
 }));
-router.use(passport.initialize());
-router.use(passport.session())
 
+
+router.use(passport.initialize());
+router.use(passport.session());
 
 // Passport routes
 // Login
-router.post('/auth/login', passport.authenticate('local'), (request, response, next) => {
+router.post('/login', passport.authenticate('local'), (request, response, next) => {
     console.log('In login.')
     passport.authenticate('local', (err, user, info) => {
         console.log('IN passport.authenticate')
@@ -66,6 +68,18 @@ router.post('/auth/login', passport.authenticate('local'), (request, response, n
             });
         });
     })(request, response, next);
+});
+
+router.use((request, response, next) => {
+    console.log('!!!here', request.isAuthenticated())
+    if (request.isAuthenticated() === true) {
+        next();
+        
+    }
+    else {
+        response.status(403);
+        response.send({success: false})
+    }
 });
 
 // router.POST('/login', (req, res, next) => {
@@ -104,17 +118,7 @@ router.post('/createNewUser', (req, res, next) => {
 // });
 
 
-router.use((request, response, next) => {
-    console.log('!!!here', request.isAuthenticated())
-    if (request.isAuthenticated() === true) {
-        next();
-        
-    }
-    else {
-        response.status(403);
-        response.send({success: false})
-    }
-})
+
 
 
 module.exports = (theDb) => {

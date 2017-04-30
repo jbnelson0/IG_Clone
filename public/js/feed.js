@@ -7,6 +7,7 @@ const feed = document.querySelector('.js-feed-feed');
 
 console.log(feed);
 
+
 // Render stuff
 function renderFeed(feedItems) {
 	userInfo.innerHTML = '';
