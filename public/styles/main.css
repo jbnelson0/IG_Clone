@@ -64,10 +64,10 @@ img.avatar {
     width:50%;
 }
 
-/* The "Forgot password" text 
-    span.password {
+/* The "Forgot password" text */
+span.password {
     float: right;
-    padding-top: 16px;*/
+    padding-top: 16px;
 }
 
 
@@ -76,5 +76,28 @@ img.avatar {
         display: block;
         float: none;
     }
+
+
+.ui.container.half {
+    width: 50%;
+    margin: auto;
+}
+
+.ui.container.eighty {
+    width: 80%;
+    margin: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

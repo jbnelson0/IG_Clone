@@ -27,20 +27,57 @@ passport.deserializeUser((user, done) => {
     });
 });
 // Local strategy
-passport.use(new LocalStrategy(
-    (username, password, done) => {
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+}, (username, password, done) => {
         console.log('Username: ' + username, password)
         db.get('SELECT user_id, username FROM users WHERE username = ? AND password = ?', [username, password])
             .then((user) => {
                 console.log(user);
                 if(!user) return done(null, false);
                 console.log('Login Successful!');
-                return done(null, row);
+                return done(null, user);
             })
             .catch(err => console.log(err.stack))
 }));
+
 // Passport routes
 // Login
+router.post('/login', passport.authenticate('local'), (request, response, next) => {
+    console.log('In login.')
+    passport.authenticate('local', (err, user, info) => {
+        console.log('IN passport.authenticate')
+        if (err) console.log(err);
+        if (!user) console.log(user);
+
+        request.logIn(user, (err) => {
+            console.log('LOGGED IN')
+            if (err) return next(err);
+            console.log('SESSION')
+            console.log(request.session)
+            // if we are here, user has logged in!
+            response.header('Content-Type', 'application/json');
+
+            response.send({
+                success: true,
+            });
+        });
+    })(request, response, next);
+});
+
+router.use((request, response, next) => {
+    console.log('!!!here', request.isAuthenticated())
+    if (request.isAuthenticated() === true) {
+        next();
+        
+    }
+    else {
+        response.status(403);
+        response.send({success: false})
+    }
+});
+
 // router.POST('/login', (req, res, next) => {
 // });
 router.post('/createNewUser', (req, res, next) => {
@@ -55,4 +92,26 @@ router.post('/createNewUser', (req, res, next) => {
             res.status(401);
         });
 });
+
 module.exports = router;
+
+
+// ------Added here----------
+// Load homepage by user_id
+// router.post('/users/:id', (request, response, next) => {
+//     console.log('User home page');
+//     const id = parseInt(request.params.id, 10);
+// })
+// --------------------------
+// router.post('/createNewUser', (req, res, next) => {
+// 	console.log(req.body)
+//     Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
+//         .then((data) => {
+//         	console.log(data)
+//             res.header('Content-Type', 'application/json');
+//             res.send({ data });
+//         })
+//         .catch((e) => {
+//             res.status(401);
+//         });
+// });

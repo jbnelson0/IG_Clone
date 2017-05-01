@@ -13,7 +13,7 @@
             };
             request.send();
         });
-    } // GET
+    }; // GET
 
     function POST(url, data) {
         return new Promise((resolve, reject) => {
@@ -30,6 +30,41 @@
 
             request.send(JSON.stringify(data));
         });
+    }; // POST
+
+
+    //         const submitBtn = document.querySelector('#submit');
+    //         console.log(submitBtn);
+    //         const loginUsername = document.querySelector('#username');
+    //         const loginPassword = document.querySelector('#password');
+
+    // submitBtn.addEventListener('click', ()=>{
+    //   const username = loginUsername.value;
+    //   const password = loginPassword.value;
+    //   console.log(username)
+    //   console.log(password)
+    //   // GET('/auth/login',{username, password})
+    // })
+
+    // render more stuff
+    function renderFeed(posts) {
+        const feed = document.querySelector('.js-feed-feed');
+        feed.innerHTML = '';
+        for (const postItem of posts) {
+        
+        const h4 = document.createElement('h4');
+        h4.innerHTML = `
+                    <span class='js-feed-username'>${postItem.data.username}</span>
+                    `;
+        }
+
+        if (posts.length === 0) {
+            container.innerHTML = `
+                <li class="list-group-item">
+                No Posts!
+                </li>
+            `;
+        }
     };
     
         const LoginBtn = document.querySelector('#submit');
@@ -131,10 +166,6 @@ SignupBtn.addEventListener("click",getLogin);
       // console.log(first_name)
       // console.log(last_name)
 
-
-
-
-
 //  const update = document.getElementById('');
 // if (update){
 // update.addEventListener('click', function () {
@@ -158,10 +189,6 @@ SignupBtn.addEventListener("click",getLogin);
 // }
 
 
-
-
-
-
         //       GET('/public/', {
         //          username,
         //          password,
@@ -175,39 +202,6 @@ SignupBtn.addEventListener("click",getLogin);
         //    }
 
         // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -252,10 +246,15 @@ SignupBtn.addEventListener("click",getLogin);
 //                 } catch (e) {
 //                     reject(e);
 //                 }
-//             } // onload
-
-       
+//             } // onload     
 //         });
 //     }
+//     GET('/users.js')
+//         .then((data) => {
+//             document.querySelector('.').innerHTML = data.message;
+//         })
+//         .catch((e) => {
+//             alert(e);
+//         });
 
- 
+
