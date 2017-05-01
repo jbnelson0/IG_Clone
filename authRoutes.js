@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express();
+const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const session = require('express-session');
@@ -7,8 +7,6 @@ const cookieParser = require('cookie-parser');
 const Users = require('./users');
 const parser = require('body-parser');
 router.use(parser.json());
-
-let db;
 // --------
 // Initialize middlewares
 // Express application
@@ -17,14 +15,16 @@ router.use(cookieParser());
 router.use(session({
     secret: 'bigBird'
 }));
+router.use(passport.initialize());
+router.use(passport.session())
 // ---------
 passport.serializeUser((user, done) => {
-    console.log('serializeUser')
-    done(null, user)
+    done(null, user.id)
 });
 passport.deserializeUser((user, done) => {
-    console.log('deserializeUser')
-    done(null, user);
+    Users.findUserByUserID(id, (err, user) => {
+        done(err, user);
+    });
 });
 // Local strategy
 passport.use(new LocalStrategy({
@@ -41,10 +41,6 @@ passport.use(new LocalStrategy({
             })
             .catch(err => console.log(err.stack))
 }));
-
-
-router.use(passport.initialize());
-router.use(passport.session());
 
 // Passport routes
 // Login
@@ -97,6 +93,9 @@ router.post('/createNewUser', (req, res, next) => {
         });
 });
 
+module.exports = router;
+
+
 // ------Added here----------
 // Load homepage by user_id
 // router.post('/users/:id', (request, response, next) => {
@@ -116,13 +115,3 @@ router.post('/createNewUser', (req, res, next) => {
 //             res.status(401);
 //         });
 // });
-
-
-
-
-
-module.exports = (theDb) => {
-    db = theDb;
-    return router;
-}
-

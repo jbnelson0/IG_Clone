@@ -1,38 +1,68 @@
-// Setting elements to append child
-const userInfo = document.querySelector('.js-feed-user_info');
+(()=> {
+	function renderFeed(posts) {
+		console.log(posts)
+	    const feed = document.querySelector('.js-feed-feed');
+	    feed.innerHTML = '';
+	    for (const postItem of posts) {
+	    	console.log(postItem)
+		    const h4 = document.createElement('h4');
+		    h4.innerHTML = `
+	                <span class='js-feed-username'>${postItem.username}</span>
+		            <div>
+		            	<img src="${postItem.post}" alt="" />
+	                </div>
+	                `;
+	         feed.appendChild(h4)
+	    }
 
-console.log(userInfo);
+		if (posts.length === 0) {
+			container.innerHTML = `
+				<li class="list-group-item">
+				No Posts!
+				</li>
+			`;
+		}
+	};
 
-const feed = document.querySelector('.js-feed-feed');
+	function GET(url) {
+        return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            request.open('GET', url);
+            request.onload = () => {
+                const data = JSON.parse(request.responseText);
+                resolve(data)
+            }; 
+            request.onerror = (err) => {
+                reject(err)
+            };
+            request.send();
+        });
+    }; // GET
 
-console.log(feed);
+    GET('./api/getCurrentUser').then((res) => {
+    	console.log(res)
+    	localStorage.setItem("currentUser", res.user_id);
+    })
+
+    const userId = localStorage.getItem('currentUser');
+    console.log(userId)
+    GET(`./api/feed/${userId}/users`).then(res => {
+    	const feed = res;
+    	renderFeed(feed)
+
+    	//Render DOM HERE
 
 
-// Render stuff
-function renderFeed(feedItems) {
-	userInfo.innerHTML = '';
-}
 
-// render more stuff
-function renderFeed(posts) {
-    const feed = document.querySelector('.js-feed-feed');
-    feed.innerHTML = '';
-    for (const postItem of posts) {
-    
-    const h4 = document.createElement('h4');
-    h4.innerHTML = `
-                <span class='js-feed-username'>${postItem.data.username}</span>
-                `;
-    }
+    })
 
-	if (posts.length === 0) {
-		container.innerHTML = `
-			<li class="list-group-item">
-			No Posts!
-			</li>
-		`;
-	}
-}
+
+
+
+
+
+})()
+
 
 // 	function GET(url) {
 // 		return new Promise((resolve, reject) => {
