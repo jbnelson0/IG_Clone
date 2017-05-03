@@ -17,7 +17,7 @@ app.use('/', express.static('./public/', {
     'index': ['index.html']
 }));
 
-app.use('/auth', authRoutes(db));
+app.use('/auth', authRoutes);
 
 app.use('/api', apiRoutes);
 
