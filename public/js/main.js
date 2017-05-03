@@ -45,6 +45,55 @@
     //   console.log(password)
     //   // GET('/auth/login',{username, password})
     // })
+<<<<<<< HEAD
+    
+
+      const submitBtn = document.querySelector('#submit');
+        const loginUsername = document.querySelector('#username');
+        const loginPassword = document.querySelector('#password');
+
+    submitBtn.addEventListener('click', (e)=>{
+        e.preventDefault();
+
+      const username = loginUsername.value;
+      const password = loginPassword.value;
+
+      console.log(username)
+      console.log(password)
+
+      POST('/auth/login', {
+        email: username,
+        password
+      })
+
+    });  // GET('/auth/login',{username, password})
+
+    //    const signupSubmitBtn = document.querySelector('.js-signup-BTN');
+    //         const signupUsername = document.querySelector('.js-signup-un');
+    //         const signupPassword = document.querySelector('.js-signup-pw');
+    //         const signupFirstName = document.querySelector('.js-signup-fn');
+    //         const signupLastName = document.querySelector('.js-signup-ln');
+
+    // signupSubmitBtn.addEventListener('click', (e)=>{
+    //  e.preventDefault();
+
+    //   const username = signupUsername.value;
+    //   const password = signupPassword.value;
+    //   const firstName = signupFirstName.value;
+    //   const lastName = signupLastName.value;
+
+    //   console.log(username)
+    //   console.log(password)
+    //   console.log(firstName)
+    //   console.log(lastName)
+
+    //   POST('/auth/createNewUser',{username, password, firstName, lastName})
+
+
+    // })
+
+
+=======
 
     // render more stuff
     function renderFeed(posts) {
@@ -187,6 +236,7 @@ SignupBtn.addEventListener("click",getLogin);
 // })
 // })
 // }
+>>>>>>> e3a87f398fde475f52bd2ca7d3739e52d399838e
 
 
         //       GET('/public/', {
@@ -206,6 +256,42 @@ SignupBtn.addEventListener("click",getLogin);
 
 
 
+<<<<<<< HEAD
+
+
+
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=======
+>>>>>>> e3a87f398fde475f52bd2ca7d3739e52d399838e
 // (function(){
 //  const username = document.querySelector('username')
 //  const password = document.querySelector('password')
@@ -249,6 +335,10 @@ SignupBtn.addEventListener("click",getLogin);
 //             } // onload     
 //         });
 //     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> e3a87f398fde475f52bd2ca7d3739e52d399838e
 //     GET('/users.js')
 //         .then((data) => {
 //             document.querySelector('.').innerHTML = data.message;
@@ -257,4 +347,8 @@ SignupBtn.addEventListener("click",getLogin);
 //             alert(e);
 //         });
 
+<<<<<<< HEAD
+})();
+=======
 
+>>>>>>> e3a87f398fde475f52bd2ca7d3739e52d399838e
