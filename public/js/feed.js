@@ -16,7 +16,7 @@
 	    }
 
 		if (posts.length === 0) {
-			container.innerHTML = `
+			feed.innerHTML = `
 				<li class="list-group-item">
 				No Posts!
 				</li>

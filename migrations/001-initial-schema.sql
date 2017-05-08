@@ -35,8 +35,5 @@ CREATE TABLE feed AS SELECT user_id, username, profile_pic, post FROM users INNE
 
 DROP TABLE users;
 DROP TABLE posts;
-<<<<<<< HEAD
 DROP TABLE feed;
-=======
-DROP TABLE feed;
->>>>>>> ce5cc08b78f287fc3d2ce540f9e873671532223c
+
