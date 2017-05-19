@@ -17,7 +17,7 @@ CREATE TABLE posts(
 );
 
 -- fake users
-INSERT INTO users (username, password, first_name, last_name) VALUES ('jsmith1', 'abc123', 'John', 'Smith');
+INSERT INTO users (username, password, first_name, last_name) VALUES ('j@smith1', 'abc123', 'John', 'Smith');
 INSERT INTO users (username, password, first_name, last_name) VALUES ('aadams1', 'ghi789', 'Amy', 'Adams');
 INSERT INTO users (username, password, first_name, last_name) VALUES ('jsnow1', 'def456', 'John', 'Snow');
 

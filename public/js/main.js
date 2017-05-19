@@ -18,16 +18,19 @@
     function POST(url, data) {
         return new Promise((resolve, reject) => {
             const request = new XMLHttpRequest();
-            request.open('POST', url);
+            const baseURL = 'http://localhost:8008';
+            request.open('POST', baseURL + url);
+            console.log(baseURL + url);
             request.setRequestHeader('Content-Type', 'application/json');
+             console.log(request.responseText);
             request.onload = () => {
-                const data = JSON.parse(request.responseText);
+                const data = JSON.stringify(request.responseText);
                 resolve(data)
             }; 
             request.onerror = (err) => {
                 reject(err)
             };
-
+            console.log(JSON.stringify(data));
             request.send(JSON.stringify(data));
         });
     };
@@ -63,8 +66,15 @@
 
       POST('/auth/login', {
         email: username,
-        password
+        password: password
       })
+      .then((data) => {
+        console.log(data, data.success);
+        if (data.success) {
+            window.location.href = '/homefeed.html'
+        }
+    })
+      
 
     });  // GET('/auth/login',{username, password})
 

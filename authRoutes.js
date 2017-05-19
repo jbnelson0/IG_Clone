@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const Users = require('./users');
 const parser = require('body-parser');
+const db = require('sqlite');
 router.use(parser.json());
 // --------
 // Initialize middlewares
@@ -19,13 +20,11 @@ router.use(passport.initialize());
 router.use(passport.session())
 // ---------
 passport.serializeUser((user, done) => {
-    done(null, user_id)
+    done(null, user)
 });
 
 passport.deserializeUser((user, done) =>{
-  Users.findUserByUserID(user_id, (err, user) => {
-    done(err, user);
-  });
+    done(null, user)
 });
 
 // Local strategy
@@ -61,9 +60,7 @@ router.post('/login', passport.authenticate('local'), (request, response, next) 
             // if we are here, user has logged in!
             response.header('Content-Type', 'application/json');
 
-            response.send({
-                success: true,
-            });
+            response.send({success: true});
         });
     })(request, response, next);
 });
