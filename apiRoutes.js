@@ -134,20 +134,22 @@ App.get('/:id/main/feed', (request, response) => {
 		})
 });
 
-// App.get('/test', (request, response) => {
-// 	console.log('inside follower test');
-// 	const id = parseInt(request.params.id, 10)
-//     return followers.returnFollowers()
-//     	.then((data) => {
-// 			console.log(data)
-// 			response.send(data);
-// 		})
-// 		.catch((e) => {
-// 			console.log(e);
-// 			response.status(403);
-// 			response.send({error: e})
-// 		})
-// });
+App.post('/createNewFollower', (req, res, next) => {
+	console.log(req.body)
+    return users.createNewUser(req.body.userID, req.body.followerID)
+        .then((data) => {
+            console.log(data)
+            res.send(JSON.stringify({
+            	data,
+            	success: true
+            }));
+        })
+        .catch((e) => {
+            console.log(e);
+            res.status(403);
+            res.send({error: e})
+        })
+});
 
 // App.get('/:id/testing', (request, response) => {
 // 	console.log('inside follower test');
