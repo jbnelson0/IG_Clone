@@ -2,7 +2,7 @@ const db = require('sqlite');
 const DB = {}
 
 DB.createNewUser = (username, password, firstName, lastName) => {
-	return db.run("INSERT INTO users (username, password, fist_name, last_name) values (?, ?)", [username, password, firstName, lastName])
+	return db.run("INSERT INTO users (username, password, first_name, last_name) values (?, ?, ?, ?)", [username, password, firstName, lastName])
 		.then(() => {
 			return db.all("SELECT * FROM users")
 		})

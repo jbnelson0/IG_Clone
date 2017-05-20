@@ -41,8 +41,7 @@
 
     // console.log(user)
     GET('./api/:id/users').then((res) => {
-
-    	console.log('in api/id/users', res)
+		console.log('in api/id/users', res)
     })
 
     const userId = localStorage.getItem('currentUser');

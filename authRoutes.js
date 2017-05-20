@@ -81,19 +81,7 @@ router.use((request, response, next) => {
 
 // router.POST('/login', (req, res, next) => {
 // });
-router.post('/createNewUser', (req, res, next) => {
-	console.log(req.body)
-    Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
-        .then((data) => {
-            console.log(data)
-            response.send(data);
-        })
-        .catch((e) => {
-            console.log(e);
-            response.status(403);
-            response.send({error: e})
-        })
-});
+
 
 
 module.exports = router;

@@ -100,6 +100,24 @@ App.get('/feed', (request, response, next) => {
 		})
 });
 
+// create new user
+App.post('/createNewUser', (req, res, next) => {
+	console.log(req.body)
+    return users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
+        .then((data) => {
+            console.log(data)
+            res.send(JSON.stringify({
+            	data,
+            	success: true
+            }));
+        })
+        .catch((e) => {
+            console.log(e);
+            res.status(403);
+            res.send({error: e})
+        })
+});
+
 // Test for Followers
 App.get('/test', (request, response) => {
 	console.log('inside follower test');
