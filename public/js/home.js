@@ -1,10 +1,12 @@
 // Main feed / landing page after login
 (()=> {// Protect the Lemurs
 	function renderFeed(posts) {
+		let followerID = []
 	    const feed = document.querySelector('.js-feed-feed');
 	    feed.innerHTML = '';
 	    for (const postItem of posts) {
-	    	console.log(postItem)
+	    	followerID.push(postItem.followerID)
+	    	console.log(followerID, 'in renderfeed loop')
 		    const h4 = document.createElement('h4');
 		    h4.innerHTML = `
 	                <span class='js-feed-username'>${postItem.username}</span>
@@ -14,7 +16,6 @@
 	                `;
 	         feed.appendChild(h4)
 	    }
-
 		if (posts.length === 0) {
 			feed.innerHTML = `
 				<li class="list-group-item">

@@ -1,5 +1,6 @@
 (()=> {// Protect the Lemurs
 	function renderFeed(posts) {
+		console.log(posts, 'posts in feed.js')
 	    const feed = document.querySelector('.js-feed-feed');
 	    feed.innerHTML = '';
 	    for (const postItem of posts) {
