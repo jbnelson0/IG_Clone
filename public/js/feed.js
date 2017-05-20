@@ -40,7 +40,7 @@
 
 
     // console.log(user)
-    GET('./api/:id/users').then((res) => {
+    GET('/api/:id/users').then((res) => {
 		console.log('in api/id/users', res)
     })
 

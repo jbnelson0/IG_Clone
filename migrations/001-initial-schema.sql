@@ -16,6 +16,19 @@ CREATE TABLE posts(
 	post 	TEXT	NOT NULL
 );
 
+-- followers
+CREATE TABLE followers(
+	userID 	INTEGER	NOT NULL,
+	followerID	INTEGER NOT NULL
+);
+
+--fake followers
+INSERT INTO followers (userID, followerID) VALUES (1,2);
+INSERT INTO followers (userID, followerID) VALUES (2,3);
+INSERT INTO followers (userID, followerID) VALUES (3,1);
+INSERT INTO followers (userID, followerID) VALUES (3,2);
+INSERT INTO followers (userID, followerID) VALUES (2,1);
+
 -- fake users
 INSERT INTO users (username, password, first_name, last_name) VALUES ('j@smith', 'abc123', 'John', 'Smith');
 INSERT INTO users (username, password, first_name, last_name) VALUES ('a@adams', 'ghi789', 'Amy', 'Adams');
@@ -30,10 +43,17 @@ INSERT INTO posts (id, post) VALUES (3, 'https://www.bigstockphoto.com/images/ho
 -- create feed table 
 -- functions located in posts.js
 CREATE TABLE feed AS SELECT user_id, username, profile_pic, post FROM users INNER JOIN posts ON users.user_id = posts.id;
+
+--functions in followers.js
+CREATE TABLE followersFeed AS SELECT userID, followerID, username, post FROM followers INNER JOIN feed ON followers.followerID = feed.user_id;
+
 -- DOWN
 
 
 DROP TABLE users;
 DROP TABLE posts;
 DROP TABLE feed;
+DROP TABLE followers;
+DROP TABLE followersFeed;
+
 
