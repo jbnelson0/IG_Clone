@@ -1,4 +1,4 @@
-(function() {
+(function() {// Protect the Lemurs
 
     function GET(url) {
         return new Promise((resolve, reject) => {
@@ -20,11 +20,11 @@
             const request = new XMLHttpRequest();
             const baseURL = 'http://localhost:8008';
             request.open('POST', baseURL + url);
-            console.log(baseURL + url);
+            console.log(baseURL + url, 'in POST');
             request.setRequestHeader('Content-Type', 'application/json');
              console.log(request.responseText);
             request.onload = () => {
-                const data = JSON.stringify(request.responseText);
+                const data = JSON.parse(request.responseText);
                 resolve(data)
             }; 
             request.onerror = (err) => {
@@ -67,13 +67,13 @@
       POST('/auth/login', {
         email: username,
         password: password
-      })
-      .then((data) => {
-        console.log(data, data.success);
+      }).then((data) => {
+        localStorage.setItem("currentUser", data.userID);
+        console.log(data, data.success, data.userID)
         if (data.success) {
             window.location.href = '/homefeed.html'
         }
-    })
+      })
       
 
     });  // GET('/auth/login',{username, password})

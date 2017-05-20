@@ -1,6 +1,5 @@
-(()=> {
+(()=> {// Protect the Lemurs
 	function renderFeed(posts) {
-		console.log(posts)
 	    const feed = document.querySelector('.js-feed-feed');
 	    feed.innerHTML = '';
 	    for (const postItem of posts) {
@@ -39,13 +38,15 @@
         });
     }; // GET
 
-    GET('./api/getCurrentUser').then((res) => {
-    	console.log(res)
-    	localStorage.setItem("currentUser", res.user_id);
+
+    // console.log(user)
+    GET('./api/:id/users').then((res) => {
+		console.log('in api/id/users', res)
     })
 
     const userId = localStorage.getItem('currentUser');
     console.log(userId)
+
     GET(`./api/feed/${userId}/users`).then(res => {
     	const feed = res;
     	renderFeed(feed)

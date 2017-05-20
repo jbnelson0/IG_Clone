@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
 const Users = require('./users');
 const parser = require('body-parser');
 const db = require('sqlite');
@@ -11,11 +10,11 @@ router.use(parser.json());
 // --------
 // Initialize middlewares
 // Express application
-router.use(cookieParser());
 // Req'd for passport
 router.use(session({
     secret: 'bigBird'
 }));
+
 router.use(passport.initialize());
 router.use(passport.session())
 // ---------
@@ -56,14 +55,17 @@ router.post('/login', passport.authenticate('local'), (request, response, next) 
             console.log('LOGGED IN')
             if (err) return next(err);
             console.log('SESSION')
-            console.log(request.session)
+            console.log(request.session, 'in session', user.user_id)
             // if we are here, user has logged in!
             response.header('Content-Type', 'application/json');
 
-            response.send({success: true});
+            response.send(JSON.stringify({
+                userID: user.user_id,
+                success: true}));
         });
     })(request, response, next);
 });
+
 
 router.use((request, response, next) => {
     console.log('!!!here', request.isAuthenticated())
@@ -79,20 +81,6 @@ router.use((request, response, next) => {
 
 // router.POST('/login', (req, res, next) => {
 // });
-router.post('/createNewUser', (req, res, next) => {
-	console.log(req.body)
-    Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
-        .then((data) => {
-            console.log(data)
-            response.send(data);
-        })
-        .catch((e) => {
-            console.log(e);
-            response.status(403);
-            response.send({error: e})
-        })
-});
-
 
 module.exports = router;
 
