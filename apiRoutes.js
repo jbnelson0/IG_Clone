@@ -2,8 +2,9 @@ const express = require('express');
 const App = express()
 const db = require('sqlite')
 
-const users = require('./users.js')
-const posts = require('./posts.js')
+const users = require('./users')
+const posts = require('./posts')
+const followers = require('./followers')
 
 // Find all users
 App.get('/users', (request, response) => {
@@ -119,13 +120,13 @@ App.post('/createNewUser', (req, res, next) => {
 });
 
 // Test for Followers
-App.get('/test', (request, response) => {
+App.get('/:id/main/feed', (request, response) => {
 	console.log('inside follower test');
-    return posts.returnMainFeed()
+	const id = parseInt(request.params.id, 10)
+    return followers.returnFollowersByID(id)
     	.then((data) => {
-			console.log(data)
-			response.send(data);
-		})
+    		response.send(data)
+    	})
 		.catch((e) => {
 			console.log(e);
 			response.status(403);
@@ -133,6 +134,35 @@ App.get('/test', (request, response) => {
 		})
 });
 
+// App.get('/test', (request, response) => {
+// 	console.log('inside follower test');
+// 	const id = parseInt(request.params.id, 10)
+//     return followers.returnFollowers()
+//     	.then((data) => {
+// 			console.log(data)
+// 			response.send(data);
+// 		})
+// 		.catch((e) => {
+// 			console.log(e);
+// 			response.status(403);
+// 			response.send({error: e})
+// 		})
+// });
+
+// App.get('/:id/testing', (request, response) => {
+// 	console.log('inside follower test');
+// 	const id = parseInt(request.params.id, 10)
+//     return followers.returnFeed(id)
+//     	.then((data) => {
+// 			console.log(data)
+// 			response.send(data);
+// 		})
+// 		.catch((e) => {
+// 			console.log(e);
+// 			response.status(403);
+// 			response.send({error: e})
+// 		})
+// });
 module.exports = App
 
 
