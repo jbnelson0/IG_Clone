@@ -1,6 +1,6 @@
 // Main feed / landing page after login
 (()=> {// Protect the Lemurs
-	function renderFeed(posts) {
+	function renderFollowers(posts) {
 		let followerID = []
 	    const feed = document.querySelector('.js-feed-feed');
 	    feed.innerHTML = '';
@@ -10,8 +10,9 @@
 		    const h4 = document.createElement('h4');
 		    h4.innerHTML = `
 	                <span class='js-feed-username'>${postItem.username}</span>
-		            <div>
-		            	<img src="${postItem.post}" alt="" />
+	                <button class='ui-button js-follow'>Follow</button>
+		            <div class='js-image'>
+		            	<img class ='js-feed-images' src="${postItem.post}" alt="" >
 	                </div>
 	                `;
 	         feed.appendChild(h4)
@@ -23,6 +24,13 @@
 				</li>
 			`;
 		}
+		const followBtn = document.querySelector('button.ui-button.js-follow');
+   		console.log(followBtn);
+
+   		followBtn.addEventListener('click', (e)=>{
+     		e.preventDefault();
+     		console.log(followerID);
+     	});
 	};
 
 	function GET(url) {
@@ -49,7 +57,7 @@
 	GET(`/api/${userId}/main/feed`).then(res => {
     	console.log(res, 'in api/id/testing')
     	const feed = res;
-    	renderFeed(feed)
+    	renderFollowers(feed)
 
     	//Render DOM HERE
     })
