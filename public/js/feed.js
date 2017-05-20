@@ -39,10 +39,10 @@
     }; // GET
 
 
+    // console.log(user)
     GET('./api/:id/users').then((res) => {
-    	
-    	console.log('api/users', res[0].user_id)
-    	localStorage.setItem("currentUser", res[0].user_id);
+
+    	console.log('in api/id/users', res)
     })
 
     const userId = localStorage.getItem('currentUser');

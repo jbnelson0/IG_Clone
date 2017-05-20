@@ -59,7 +59,9 @@ router.post('/login', passport.authenticate('local'), (request, response, next) 
             // if we are here, user has logged in!
             response.header('Content-Type', 'application/json');
 
-            response.send(JSON.stringify({success: true}));
+            response.send(JSON.stringify({
+                userID: user.user_id,
+                success: true}));
         });
     })(request, response, next);
 });

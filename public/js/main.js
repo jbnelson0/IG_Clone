@@ -68,7 +68,8 @@
         email: username,
         password: password
       }).then((data) => {
-        console.log(data, data.success)
+        localStorage.setItem("currentUser", data.userID);
+        console.log(data, data.success, data.userID)
         if (data.success) {
             window.location.href = '/homefeed.html'
         }
