@@ -1,4 +1,4 @@
-(function() {
+(function() {// Protect the Lemurs
 
     function GET(url) {
         return new Promise((resolve, reject) => {

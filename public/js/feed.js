@@ -1,4 +1,4 @@
-(()=> {
+(()=> {// Protect the Lemurs
 	function renderFeed(posts) {
 	    const feed = document.querySelector('.js-feed-feed');
 	    feed.innerHTML = '';
