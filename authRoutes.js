@@ -1,30 +1,31 @@
 const express = require('express');
-const router = express();
+const router = express.Router();
 const passport = require('passport');
-const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
 const Users = require('./users');
 const parser = require('body-parser');
+const db = require('sqlite');
 router.use(parser.json());
-
-let db;
 // --------
 // Initialize middlewares
 // Express application
-router.use(cookieParser());
 // Req'd for passport
 router.use(session({
     secret: 'bigBird'
 }));
+
+router.use(passport.initialize());
+router.use(passport.session())
 // ---------
 passport.serializeUser((user, done) => {
     done(null, user)
 });
-passport.deserializeUser((user, done) => {
-    console.log(user, '------------')
-    done(null, user);
+
+passport.deserializeUser((user, done) =>{
+    done(null, user)
 });
+
 // Local strategy
 passport.use(new LocalStrategy({
     usernameField: 'email',
@@ -40,13 +41,10 @@ passport.use(new LocalStrategy({
             })
             .catch(err => console.log(err.stack))
 }));
-router.use(passport.initialize());
-router.use(passport.session())
-
 
 // Passport routes
 // Login
-router.post('/auth/login', passport.authenticate('local'), (request, response, next) => {
+router.post('/login', passport.authenticate('local'), (request, response, next) => {
     console.log('In login.')
     passport.authenticate('local', (err, user, info) => {
         console.log('IN passport.authenticate')
@@ -57,51 +55,16 @@ router.post('/auth/login', passport.authenticate('local'), (request, response, n
             console.log('LOGGED IN')
             if (err) return next(err);
             console.log('SESSION')
-            console.log(request.session)
+            console.log(request.session, 'in session', user.user_id)
             // if we are here, user has logged in!
             response.header('Content-Type', 'application/json');
 
-            response.send({
-                success: true,
-            });
+            response.send(JSON.stringify({
+                userID: user.user_id,
+                success: true}));
         });
     })(request, response, next);
 });
-
-// router.POST('/login', (req, res, next) => {
-// });
-router.post('/createNewUser', (req, res, next) => {
-	console.log(req.body)
-    Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
-        .then((data) => {
-        	console.log(data)
-            res.header('Content-Type', 'application/json');
-            res.send({ data });
-        })
-        .catch((e) => {
-            res.status(401);
-        });
-});
-
-// ------Added here----------
-// Load homepage by user_id
-router.post('/users/:id', (request, response, next) => {
-    console.log('User home page');
-    const id = parseInt(request.params.id, 10);
-})
-// --------------------------
-// router.post('/createNewUser', (req, res, next) => {
-// 	console.log(req.body)
-//     Users.createNewUser(req.body.username, req.body.password, req.body.firstName, req.body.lastName)
-//         .then((data) => {
-//         	console.log(data)
-//             res.header('Content-Type', 'application/json');
-//             res.send({ data });
-//         })
-//         .catch((e) => {
-//             res.status(401);
-//         });
-// });
 
 
 router.use((request, response, next) => {
@@ -114,11 +77,11 @@ router.use((request, response, next) => {
         response.status(403);
         response.send({success: false})
     }
-})
+});
 
+// router.POST('/login', (req, res, next) => {
+// });
 
-module.exports = (theDb) => {
-    db = theDb;
-    return router;
-}
+module.exports = router;
+
 

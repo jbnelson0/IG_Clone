@@ -1,24 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.css">
 <link rel="stylesheet" href="styles/main.css">
 	<title></title>
 </head>
 <body>
+<div class="container">
 <h2>Login Form</h2>
 
-<form>
+
   <div class="imgcontainer">
-    
   </div>
 
   <div class="container">
     <label><b>Username</b></label>
     <input type id="username" placeholder="Enter Username" name="username" required>
+    <br></br>    
 
-    <label><b>Password</b></label>
-    <input type id="password" placeholder="Enter Password" name="password" required>
-        
+    <div>
+      <label>
+        <b>Password</b>
+      </label>
+      <input type id="password" placeholder="Enter Password" name="password" required>
+    </div>
+    <br></br>
+    
     <button type id="submit">Login</button>
     <input type="checkbox" checked="checked"> Remember me
   </div>
@@ -26,8 +33,9 @@
   <div class="container" style="background-color:#f1f1f1">
     <span class="Signup"> <a href="signup.html">Signup </a></span>
   </div>
-</form>
 
+
+</div>
 </body>
 <script src="js/main.js"></script>
 </html>

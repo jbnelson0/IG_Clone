@@ -5,7 +5,7 @@
 </head>
 
     <input type="file" class="js-fileElem" multiple accept="image/*" style="display:none">
-    <a href="#" class="js-fileSelect">Select some files</a>
+    <button href="#" class="js-fileSelect">Select some files</button>
 
   <script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
   <script>
@@ -64,7 +64,7 @@
             // we console.log the urls...but we can do whatever we need to with this data 
             // from here
             Promise.all(fileUploads).then((items) => {
-                console.log(items);
+                console.log(items[0]);
             });
             /* END ADDED THESE LINES */
         });

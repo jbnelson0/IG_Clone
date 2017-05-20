@@ -1,4 +1,4 @@
-(function() {
+(function() {// Protect the Lemurs
 
     function GET(url) {
         return new Promise((resolve, reject) => {
@@ -18,8 +18,11 @@
     function POST(url, data) {
         return new Promise((resolve, reject) => {
             const request = new XMLHttpRequest();
-            request.open('POST', url);
+            const baseURL = 'http://localhost:8008';
+            request.open('POST', baseURL + url);
+            console.log(baseURL + url, 'in POST');
             request.setRequestHeader('Content-Type', 'application/json');
+             console.log(request.responseText);
             request.onload = () => {
                 const data = JSON.parse(request.responseText);
                 resolve(data)
@@ -27,15 +30,10 @@
             request.onerror = (err) => {
                 reject(err)
             };
-
+            console.log(JSON.stringify(data));
             request.send(JSON.stringify(data));
         });
     };
-    
-    		const submitBtn = document.querySelector('#submit');
-            console.log(submitBtn);
-            const loginUsername = document.querySelector('#username');
-            const loginPassword = document.querySelector('#password');
  // POST
 
 
@@ -53,7 +51,7 @@
     // })
     
 
-    	const submitBtn = document.querySelector('#submit');
+      const submitBtn = document.querySelector('#submit');
         const loginUsername = document.querySelector('#username');
         const loginPassword = document.querySelector('#password');
 
@@ -68,19 +66,26 @@
 
       POST('/auth/login', {
         email: username,
-        password
+        password: password
+      }).then((data) => {
+        localStorage.setItem("currentUser", data.userID);
+        console.log(data, data.success, data.userID)
+        if (data.success) {
+            window.location.href = '/homefeed.html'
+        }
       })
+      
 
     });  // GET('/auth/login',{username, password})
 
-    // 		const signupSubmitBtn = document.querySelector('.js-signup-BTN');
+    //    const signupSubmitBtn = document.querySelector('.js-signup-BTN');
     //         const signupUsername = document.querySelector('.js-signup-un');
     //         const signupPassword = document.querySelector('.js-signup-pw');
     //         const signupFirstName = document.querySelector('.js-signup-fn');
     //         const signupLastName = document.querySelector('.js-signup-ln');
 
     // signupSubmitBtn.addEventListener('click', (e)=>{
-    // 	e.preventDefault();
+    //  e.preventDefault();
 
     //   const username = signupUsername.value;
     //   const password = signupPassword.value;
@@ -94,114 +99,5 @@
 
     //   POST('/auth/createNewUser',{username, password, firstName, lastName})
 
-
-    // })
-
-
-
-
-        //    	 GET('/public/', {
-        //          username,
-        //          password,
-        //      }).then((data) => {
-        //          console.log(data)
-        //          if (data.success) {
-        //              window.location.href = '/index.html'
-        //         }
-        //     });
-
-        //    }
-
-        // });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// (function(){
-// 	const username = document.querySelector('username')
-// 	const password = document.querySelector('password')
-// 	const button = document.querySelector('submit')
-// 	const url = 'url'
-            
-// 	    function POST(url, data) {
-//         return new Promise((resolve, reject) => {
-//             const request = new XMLHttpRequest();
-//             request.open('POST', url);
-//             request.setRequestHeader('Content-Type', 'application/json');
-
-//             request.onload = () => {
-//                 const data = JSON.parse(request.responseText);
-//                 resolve(data)
-//             }; 
-//             request.onerror = (err) => {
-//                 reject(err)
-//             };
-
-//             request.send(JSON.stringify(data));
-//         });
-//     } // POST
-	
-//     const GET = (url = null) => {
-//         return new Promise((resolve, reject) => {
-//             if (url === null) {
-//                 reject('URL not valid');
-//             }
-
-//             const http = new XMLHttpRequest();
-//             http.open('GET', url);
-
-//             http.onload = () => {
-//                 try {
-//                     const jsonData = JSON.parse(http.responseText);
-//                     resolve(jsonData);
-//                 } catch (e) {
-//                     reject(e);
-//                 }
-//             } // onload
-
-       
-//         });
-//     }
-
-//     GET('/users.js')
-//         .then((data) => {
-//             document.querySelector('.').innerHTML = data.message;
-//         })
-//         .catch((e) => {
-//             alert(e);
-//         });
-
 })();
+ 
