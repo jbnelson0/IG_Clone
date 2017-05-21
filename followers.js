@@ -14,7 +14,7 @@ DB.returnFollowersByID = (userID) => {
 DB.addNewFollower = (userID, followerID) => {
 	return db.run("INSERT INTO followers (userID, followerID) VALUES (?, ?)", [userID, followerID])
 	.then(()=>{
-		return db.all("SELECT * FROM followersFeed")
+		return db.all("SELECT * FROM posts WHERE id = ?", [followerID])
 	})
 }
 

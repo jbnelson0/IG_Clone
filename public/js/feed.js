@@ -24,6 +24,7 @@
 		}
 	};
 
+
 	function GET(url) {
         return new Promise((resolve, reject) => {
             const request = new XMLHttpRequest();

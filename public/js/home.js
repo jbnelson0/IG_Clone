@@ -1,12 +1,10 @@
 // Main feed / landing page after login
 (()=> {// Protect the Lemurs
 	function renderFollowers(posts) {
-		let followerID = []
 	    const feed = document.querySelector('.js-feed-feed');
 	    feed.innerHTML = '';
 	    for (const postItem of posts) {
-	    	followerID.push(postItem.followerID)
-	    	console.log(followerID, 'in renderfeed loop')
+	    	console.log('in renderfeed loop')
 		    const h4 = document.createElement('h4');
 		    h4.innerHTML = `
 	                <span class='js-feed-username'>${postItem.username}</span>
@@ -15,7 +13,23 @@
 		            	<img class ='js-feed-images' src="${postItem.post}" alt="" >
 	                </div>
 	                `;
-	         feed.appendChild(h4)
+
+	        console.log(h4)
+	        feed.appendChild(h4)
+
+	        h4.querySelector('.js-follow').addEventListener('click', (e)=>{
+	     		e.preventDefault();
+
+	     		const userId = localStorage.getItem('currentUser');
+	     		console.log('in event listener', postItem.followerID);
+
+	     		POST('/api/createNewFollower', {
+	     			userID: userId,
+	     			followerID: postItem.followerID
+				}).then(data => {
+					console.log(data)
+				})
+	     	});
 	    }
 		if (posts.length === 0) {
 			feed.innerHTML = `
@@ -24,14 +38,37 @@
 				</li>
 			`;
 		}
-		const followBtn = document.querySelector('button.ui-button.js-follow');
-   		console.log(followBtn);
 
-   		followBtn.addEventListener('click', (e)=>{
-     		e.preventDefault();
-     		console.log(followerID);
-     	});
-	};
+   		// for (var i=0; i<followBtn.length; i++) {
+	    //     followBtn[i].addEventListener('click', (e) => {
+	    //     	console.log('in event listener')
+	    // 	})
+	    // }
+
+
+    };
+
+        function POST(url, data) {
+        return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            const baseURL = 'http://localhost:8008';
+            request.open('POST', baseURL + url);
+            console.log(baseURL + url, 'in POST');
+            request.setRequestHeader('Content-Type', 'application/json');
+             console.log(request.responseText);
+            request.onload = () => {
+                const data = JSON.parse(request.responseText);
+                resolve(data)
+            }; 
+            request.onerror = (err) => {
+                reject(err)
+            };
+            console.log(JSON.stringify(data));
+            request.send(JSON.stringify(data));
+        });
+    };
+ // POST
+
 
 	function GET(url) {
         return new Promise((resolve, reject) => {
@@ -56,8 +93,7 @@
 	// })
 	GET(`/api/${userId}/main/feed`).then(res => {
     	console.log(res, 'in api/id/testing')
-    	const feed = res;
-    	renderFollowers(feed)
+    	renderFollowers(res)
 
     	//Render DOM HERE
     })

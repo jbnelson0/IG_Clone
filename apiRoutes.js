@@ -136,7 +136,7 @@ App.get('/:id/main/feed', (request, response) => {
 
 App.post('/createNewFollower', (req, res, next) => {
 	console.log(req.body)
-    return users.createNewUser(req.body.userID, req.body.followerID)
+    return followers.addNewFollower(req.body.userID, req.body.followerID)
         .then((data) => {
             console.log(data)
             res.send(JSON.stringify({
