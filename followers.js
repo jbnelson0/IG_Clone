@@ -11,4 +11,11 @@ DB.returnFollowersByID = (userID) => {
 	return db.all("SELECT * FROM followersFeed WHERE userID = ?", [userID])
 }
 
+DB.addNewFollower = (userID, followerID) => {
+	return db.run("INSERT INTO followers (userID, followerID) VALUES (?, ?)", [userID, followerID])
+	.then(()=>{
+		return db.all("SELECT * FROM followersFeed")
+	})
+}
+
 module.exports = DB
