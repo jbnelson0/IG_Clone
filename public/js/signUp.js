@@ -51,28 +51,5 @@
       })
     });
 
-    // submitBtn.addEventListener('click', (e)=>{
-    //     e.preventDefault();
-
-    //   const username = loginUsername.value;
-    //   const password = loginPassword.value;
-
-    //   console.log(username)
-    //   console.log(password)
-
-    //   // POST('/auth/login', {
-    //   //   email: username,
-    //   //   password: password
-    //   // }).then((data) => {
-    //   //   localStorage.setItem("currentUser", data.userID);
-    //   //   console.log(data, data.success, data.userID)
-    //   //   if (data.success) {
-    //   //       window.location.href = '/homefeed.html'
-    //   //   }
-    //   // })
-      
-
-    // });
-
 
 })()

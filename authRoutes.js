@@ -80,8 +80,6 @@ router.use((request, response, next) => {
     }
 });
 
-// router.POST('/login', (req, res, next) => {
-// });
 
 module.exports = router;
 
