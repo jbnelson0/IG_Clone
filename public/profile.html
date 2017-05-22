@@ -19,14 +19,16 @@
         <!-- MainFeed button to feed.html -->
         <a href="./feed.html"><button>Explore All Posts!</button></a>
         <a href="./followerFeed.html"><button>People You Follow!</button></a>
+        <input type="file" class="js-fileElem" multiple accept="image/*" style="display:none">
+        <button href="#" class="js-fileSelect">Upload a Picture</button>
     </div>
   </div>
   <div class="eighty ui raised very padded text container segment js-feed-feed">
   <!-- We can append this to  -->
   </div>
-  <div>
-    <a href="./upload.html"><button>Upload a Picture</button></a>
-  </div>
+
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script src="js/upload.js"></script>
 <script src="js/profile.js"></script>
 </body>
 </html>
