@@ -56,7 +56,7 @@ App.get('/posts', (request, response) => {
 App.get('/:id/posts', (request, response) => {
 	console.log('in api/:id/posts')
     const id = parseInt(request.params.id, 10)
-	return posts.findPostsByID(id)
+	return posts.returnUserFeed(id)
 		.then((data) => {
 			console.log(data)
 			response.send(data);
@@ -70,9 +70,9 @@ App.get('/:id/posts', (request, response) => {
 
 // Load homepage by user_id
 App.get('/feed/:id/users/', (request, response, next) => {
-    console.log('User home page');
+    console.log('User profile page');
     const id = parseInt(request.params.id, 10);
-    return posts.returnUserFeed(id)
+    return followers.returnFollowersByID(id)
     	.then((data) => {
 			console.log(data)
 			response.send(data);
@@ -89,7 +89,7 @@ App.get('/feed/:id/users/', (request, response, next) => {
 // loads main feed
 App.get('/feed', (request, response, next) => {
     console.log('inside /feed/posts');
-    return posts.returnMainFeed()
+    return posts.returnAllPosts()
     	.then((data) => {
 			console.log(data)
 			response.send(data);
@@ -120,23 +120,23 @@ App.post('/createNewUser', (req, res, next) => {
 });
 
 // Test for Followers
-App.get('/:id/main/feed', (request, response) => {
-	console.log('inside follower test');
-	const id = parseInt(request.params.id, 10)
-    return followers.returnFollowersByID(id)
-    	.then((data) => {
-    		response.send(data)
-    	})
-		.catch((e) => {
-			console.log(e);
-			response.status(403);
-			response.send({error: e})
-		})
-});
+// App.get('/:id/main/feed', (request, response) => {
+// 	console.log('inside follower test');
+// 	const id = parseInt(request.params.id, 10)
+//     return followers.returnFollowersByID(id)
+//     	.then((data) => {
+//     		response.send(data)
+//     	})
+// 		.catch((e) => {
+// 			console.log(e);
+// 			response.status(403);
+// 			response.send({error: e})
+// 		})
+// });
 
 App.post('/createNewFollower', (req, res, next) => {
 	console.log(req.body)
-    return followers.addNewFollower(req.body.userID, req.body.followerID)
+    return followers.addNewFollower(req.body.userID, req.body.followerID, req.body.followerPost, req.body.followerUN)
         .then((data) => {
             console.log(data)
             res.send(JSON.stringify({
