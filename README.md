@@ -9,4 +9,4 @@ Brian @bigeliseo - FE
 Chester @cjpennock - API
 
 ## Overview
-Instagram clone developed using HTML/CSS, Express, SQL
+Instagram clone developed using HTML/CSS, Express, SQLite, Javascript

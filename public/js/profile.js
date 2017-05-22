@@ -24,12 +24,6 @@
 			`;
 		}
 
-   		// for (var i=0; i<followBtn.length; i++) {
-	    //     followBtn[i].addEventListener('click', (e) => {
-	    //     	console.log('in event listener')
-	    // 	})
-	    // }
-
 
     };
 
@@ -52,9 +46,6 @@
 	const userId = localStorage.getItem('currentUser')
 	console.log(userId)
 
-	// GET('/api/${userId}/testing').then(data => {
-	// 	console.log(data)
-	// })
 	GET(`/api/${userId}/posts`).then(res => {
     	console.log(res, 'in api/id/testing')
     	renderFollowers(res)

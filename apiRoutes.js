@@ -119,20 +119,6 @@ App.post('/createNewUser', (req, res, next) => {
         })
 });
 
-// Test for Followers
-// App.get('/:id/main/feed', (request, response) => {
-// 	console.log('inside follower test');
-// 	const id = parseInt(request.params.id, 10)
-//     return followers.returnFollowersByID(id)
-//     	.then((data) => {
-//     		response.send(data)
-//     	})
-// 		.catch((e) => {
-// 			console.log(e);
-// 			response.status(403);
-// 			response.send({error: e})
-// 		})
-// });
 
 App.post('/createNewFollower', (req, res, next) => {
 	console.log(req.body)
@@ -151,20 +137,6 @@ App.post('/createNewFollower', (req, res, next) => {
         })
 });
 
-// App.get('/:id/testing', (request, response) => {
-// 	console.log('inside follower test');
-// 	const id = parseInt(request.params.id, 10)
-//     return followers.returnFeed(id)
-//     	.then((data) => {
-// 			console.log(data)
-// 			response.send(data);
-// 		})
-// 		.catch((e) => {
-// 			console.log(e);
-// 			response.status(403);
-// 			response.send({error: e})
-// 		})
-// });
 module.exports = App
 
 
