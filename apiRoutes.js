@@ -68,6 +68,24 @@ App.get('/:id/posts', (request, response) => {
 		})
 });
 
+// add new row in posts
+App.post('/createNewPost', (req, res, next) => {
+	console.log(req.body)
+    return posts.createNewPost(req.body.userID, req.body.username, req.body.post)
+        .then((data) => {
+            console.log(data)
+            res.send(JSON.stringify({
+            	data,
+            	success: true
+            }));
+        })
+        .catch((e) => {
+            console.log(e);
+            res.status(403);
+            res.send({error: e})
+        })
+});
+
 // Load homepage by user_id
 App.get('/feed/:id/users/', (request, response, next) => {
     console.log('User profile page');
