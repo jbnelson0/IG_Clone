@@ -3,18 +3,18 @@
 const db = require('sqlite');
 const DB = {}
 
-DB.returnFollowers = () =>{
-	return db.all("SELECT post FROM followersFeed")
-}
+// DB.returnFollowers = () =>{
+// 	return db.all("SELECT post FROM followersFeed")
+// }
 
 DB.returnFollowersByID = (userID) => {
-	return db.all("SELECT * FROM followersFeed WHERE userID = ?", [userID])
+	return db.all("SELECT * FROM followers WHERE userID = ?", [userID])
 }
 
-DB.addNewFollower = (userID, followerID) => {
-	return db.run("INSERT INTO followers (userID, followerID) VALUES (?, ?)", [userID, followerID])
-	.then(()=>{
-		return db.all("SELECT * FROM posts WHERE id = ?", [followerID])
+DB.addNewFollower = (userID, followerID, followerPost, followerUN) => {
+	return db.run("INSERT INTO followers (userID, followerID, followerPost, followerUN) VALUES (?, ?, ?, ?)", [userID, followerID, followerPost, followerUN])
+	.then(() => {
+		return db.all("SELECT * FROM followers")
 	})
 }
 

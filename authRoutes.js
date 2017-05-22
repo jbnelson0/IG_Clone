@@ -61,6 +61,7 @@ router.post('/login', passport.authenticate('local'), (request, response, next) 
 
             response.send(JSON.stringify({
                 userID: user.user_id,
+                username: user.username,
                 success: true}));
         });
     })(request, response, next);

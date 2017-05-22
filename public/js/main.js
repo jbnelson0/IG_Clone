@@ -69,9 +69,10 @@
         password: password
       }).then((data) => {
         localStorage.setItem("currentUser", data.userID);
+        localStorage.setItem("currentUsername", data.username);
         console.log(data, data.success, data.userID)
         if (data.success) {
-            window.location.href = '/homefeed.html'
+            window.location.href = '/profile.html'
         }
       })
       

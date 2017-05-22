@@ -1,6 +1,7 @@
 const db = require('sqlite');
 const posts = {}
 
+// create new post
 posts.createNewPost = (id, post) => {
 	return db.run("INSERT INTO posts (id, post) values (?, ?)", [id, post])
 		.then(() => {
@@ -8,20 +9,14 @@ posts.createNewPost = (id, post) => {
 		})
 };
 
-posts.findPostsByID = (user_id) =>{
-	return db.all("SELECT * FROM posts WHERE id = ? ", [user_id])
-};
-
+// main feed
 posts.returnAllPosts = () => {
 	return db.all("select * FROM posts")
 };
 
+// profile page feed
 posts.returnUserFeed = (user_id) => {
-	return db.all("SELECT * FROM feed WHERE user_id = ? ", [user_id])
-};
-
-posts.returnMainFeed = () => {
-	return db.all("SELECT * FROM feed")
+	return db.all("SELECT * FROM posts WHERE id = ? ", [user_id])
 };
 
 module.exports = posts

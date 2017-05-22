@@ -8,11 +8,28 @@
 		    const h4 = document.createElement('h4');
 		    h4.innerHTML = `
 	                <span class='js-feed-username'>${postItem.username}</span>
-		            <div>
-		            	<img src="${postItem.post}" alt="" />
+	                <button class='ui-button js-follow'>Follow</button>
+		            <div class='js-image'>
+		            	<img class ='js-feed-images' src="${postItem.post}" alt="" >
 	                </div>
 	                `;
 	         feed.appendChild(h4)
+
+	        h4.querySelector('.js-follow').addEventListener('click', (e)=>{
+	     		e.preventDefault();
+
+	     		const userId = localStorage.getItem('currentUser');
+	     		console.log('in event listener', postItem.followerID);
+
+	     		POST('/api/createNewFollower', {
+	     			userID: userId,
+	     			followerID: postItem.id,
+	     			followerPost: postItem.post,
+	     			followerUN: postItem.username
+				}).then(data => {
+					console.log(data)
+				})
+	     	});
 	    }
 
 		if (posts.length === 0) {
@@ -39,24 +56,34 @@
             request.send();
         });
     }; // GET
+    
+    function POST(url, data) {
+        return new Promise((resolve, reject) => {
+            const request = new XMLHttpRequest();
+            const baseURL = 'http://localhost:8008';
+            request.open('POST', baseURL + url);
+            console.log(baseURL + url, 'in POST');
+            request.setRequestHeader('Content-Type', 'application/json');
+             console.log(request.responseText);
+            request.onload = () => {
+                const data = JSON.parse(request.responseText);
+                resolve(data)
+            }; 
+            request.onerror = (err) => {
+                reject(err)
+            };
+            console.log(JSON.stringify(data));
+            request.send(JSON.stringify(data));
+        });
+    };
+ // POST
 
 
-    // console.log(user)
-    GET('/api/:id/users').then((res) => {
-		console.log('in api/id/users', res)
-    })
-
-    const userId = localStorage.getItem('currentUser');
-    console.log(userId)
-
-    GET(`./api/feed/${userId}/users`).then(res => {
+    GET(`./api/feed/`).then(res => {
     	const feed = res;
     	renderFeed(feed)
 
     	//Render DOM HERE
-
-
-
     })
 
 
