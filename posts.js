@@ -19,4 +19,11 @@ posts.returnUserFeed = (user_id) => {
 	return db.all("SELECT * FROM posts WHERE id = ? ", [user_id])
 };
 
+posts.deleteItem = (rId, userID) => {
+	return db.run("DELETE FROM posts WHERE rId = ?", [rId])
+	.then(() => {
+		return db.all("SELECT * FROM posts WHERE id = ? ", [userID])
+	})
+}
+
 module.exports = posts
