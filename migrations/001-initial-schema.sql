@@ -12,13 +12,15 @@ CREATE TABLE users(
 
 -- posts
 CREATE TABLE posts(
-	id 	INTEGER	PRIMARY KEY,
+	rId INTEGER	PRIMARY KEY AUTOINCREMENT,
+	id 	INTEGER	NOT NULL,
 	username	TEXT	NOT NULL,
 	post 	TEXT	NOT NULL
 );
 
 -- followers
 CREATE TABLE followers(
+	id 	INTEGER	PRIMARY KEY	AUTOINCREMENT,
 	userID 	INTEGER	NOT NULL,
 	followerID	INTEGER NOT NULL,
 	followerPost	TEXT	NOT NULL,
@@ -41,7 +43,7 @@ INSERT INTO users (username, password, first_name, last_name) VALUES ('j@snow', 
 INSERT INTO posts (id, username, post) VALUES (1, 'j@smith', 'https://www.bigstockphoto.com/images/homepage/2016_bigstock_picks.jpg');
 INSERT INTO posts (id, username, post) VALUES (2, 'a@adams', 'https://www.sitebuilderreport.com/assets/facebook-stock-up-446fff24fb11820517c520c4a5a4c032.jpg');
 INSERT INTO posts (id, username, post) VALUES (3, 'j@snow', 'https://www.bigstockphoto.com/images/homepage/2016_bigstock_video.jpg');
-
+INSERT INTO posts (id, username, post) VALUES (1, 'j@smith', 'https://www.bigstockphoto.com/images/homepage/2016_bigstock_video.jpg');
 
 -- create feed table 
 -- functions located in posts.js

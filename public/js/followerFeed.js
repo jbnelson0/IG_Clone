@@ -7,14 +7,34 @@
 	    	console.log('in renderfeed loop')
 		    const h4 = document.createElement('h4');
 		    h4.innerHTML = `
-	                <span class='js-feed-username'>${postItem.followerUN}</span>
-		            <div class='js-image'>
-		            	<img class ='js-feed-images' src="${postItem.followerPost}" alt="" >
-	                </div>
+
+<div class="ui card">
+  <div class="image">
+    <img src="${postItem.followerPost}">
+  </div>
+  <div class="content">
+    <p class="header">${postItem.followerUN}</p>
+    <button class='ui-button js-unfollow'>Unfollow</button>
+</div>
 	                `;
 
 	        console.log(h4)
 	        feed.appendChild(h4)
+
+	        const userId = localStorage.getItem('currentUser');
+	    	h4.querySelector('.js-unfollow').addEventListener('click', (e) => {
+	    		e.preventDefault()
+	    		console.log(postItem.id)
+	    			DELETE('/api/follower/' + postItem.id, {
+	    				userID: userId,
+	    			})
+					.then((data) => {
+						renderFollowers(data);
+					})
+					.catch((e) => {
+						alert(e)
+					});
+	    	});
 	    }
 		if (posts.length === 0) {
 			feed.innerHTML = `
@@ -32,6 +52,24 @@
 
 
     };
+
+    function DELETE(url, data) {
+		return new Promise((resolve, reject) => {
+			const request = new XMLHttpRequest();
+			request.open('DELETE', url);
+			request.setRequestHeader('Content-Type', 'application/json');
+
+			request.onload = () => {
+				const data = JSON.parse(request.responseText);
+				resolve(data)
+			}; 
+			request.onerror = (err) => {
+				reject(err)
+			};
+
+			request.send(JSON.stringify(data));
+		});
+	} // DELETE
 
 
 	function GET(url) {

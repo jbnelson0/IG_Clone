@@ -14,4 +14,11 @@ DB.addNewFollower = (userID, followerID, followerPost, followerUN) => {
 	})
 }
 
+DB.deleteFollower = (id, userID) => {
+	return db.run("DELETE FROM followers WHERE id = ?", [id])
+	.then(() => {
+		return db.all("SELECT * FROM followers WHERE userID = ?", [userID])
+	})
+}
+
 module.exports = DB

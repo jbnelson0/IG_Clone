@@ -7,11 +7,14 @@
 	    	console.log(postItem)
 		    const h4 = document.createElement('h4');
 		    h4.innerHTML = `
-	                <span class='js-feed-username'>${postItem.username}</span>
-	                <button class='ui-button js-follow'>Follow</button>
-		            <div class='js-image'>
-		            	<img class ='js-feed-images' src="${postItem.post}" alt="" >
-	                </div>
+<div class="ui card">
+  <div class="image">
+    <img src="${postItem.post}">
+  </div>
+  <div class="content">
+    <p class="header">${postItem.username}</p>
+    <button class='ui-button js-follow'>Follow</button>
+</div>
 	                `;
 	         feed.appendChild(h4)
 

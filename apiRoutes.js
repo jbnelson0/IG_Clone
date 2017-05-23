@@ -58,7 +58,7 @@ App.get('/:id/posts', (request, response) => {
     const id = parseInt(request.params.id, 10)
 	return posts.returnUserFeed(id)
 		.then((data) => {
-			console.log(data)
+			console.log(data, 'in id/posts')
 			response.send(data);
 		})
 		.catch((e) => {
@@ -67,6 +67,24 @@ App.get('/:id/posts', (request, response) => {
 			response.send({error: e})
 		})
 });
+
+// Delete post
+App.delete('/post/:id', (request, response) => {
+	console.log('in delete')
+	const rId = parseInt(request.params.id, 10);
+
+	return posts.deleteItem(rId, request.body.userID)
+		.then(data => {
+			console.log(data, 'in delete')
+			response.send(JSON.stringify(data))
+		})
+	    .catch((e) => {
+	        console.log(e);
+	        res.status(403);
+	        res.send({error: e})
+	    })
+
+}); // delete
 
 // add new row in posts
 App.post('/createNewPost', (req, res, next) => {
@@ -137,7 +155,7 @@ App.post('/createNewUser', (req, res, next) => {
         })
 });
 
-
+// Add follower
 App.post('/createNewFollower', (req, res, next) => {
 	console.log(req.body)
     return followers.addNewFollower(req.body.userID, req.body.followerID, req.body.followerPost, req.body.followerUN)
@@ -154,6 +172,24 @@ App.post('/createNewFollower', (req, res, next) => {
             res.send({error: e})
         })
 });
+
+// unfollow
+App.delete('/follower/:id', (request, response) => {
+	console.log('in delete')
+	const id = parseInt(request.params.id, 10);
+
+	return followers.deleteFollower(id, request.body.userID)
+		.then(data => {
+			console.log(data, 'in delete')
+			response.send(JSON.stringify(data))
+		})
+	    .catch((e) => {
+	        console.log(e);
+	        res.status(403);
+	        res.send({error: e})
+	    })
+
+}); // delete
 
 module.exports = App
 
