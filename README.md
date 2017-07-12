@@ -16,7 +16,7 @@ Instagram clone developed using HTML/CSS, Express, SQLite, Javascript
 To initialize Instagram Clone App in terminal:
 
 ```
-git clone [copy link]
+git clone [copy repo link]
 cd [folder name]
 npm install
 npm start
