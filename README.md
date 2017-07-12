@@ -25,3 +25,8 @@ npm start
 In Browser:
 
 url - http://localhost:8000
+
+Demo Login Info:
+
+Username: j@smith
+Password: abc123
